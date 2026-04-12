@@ -52,7 +52,21 @@
   .wordmark { font-family: 'Playfair Display', serif; font-size: 26px; letter-spacing: -0.5px; color: var(--text); }
   .wordmark span { color: var(--accent); }
 
+  .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+
   .doc-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); font-weight: 500; }
+
+  .lang-switch { display: flex; gap: 0.5rem; }
+  .lang-btn {
+    padding: 0.25rem 0.75rem; border-radius: 999px;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--muted); font-size: 0.75rem; cursor: pointer;
+    transition: border-color 0.15s, color 0.15s; font-family: inherit;
+  }
+  .lang-btn.active { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+
+  [data-lang] { display: none; }
+  [data-lang].visible { display: block; }
 
   .hero { margin-bottom: 56px; }
 
@@ -191,17 +205,6 @@
   .feature-body strong { display: block; font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
   .feature-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-  /* Tech stack */
-  .stack-grid { display: grid; grid-template-columns: 1fr 1fr; margin-top: 8px; border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .stack-cell { padding: 12px 16px; font-size: 13px; border-bottom: 0.5px solid var(--border); border-right: 0.5px solid var(--border); }
-  .stack-cell:nth-child(even) { border-right: none; }
-  .stack-cell.label { color: var(--faint); font-size: 11px; letter-spacing: 0.06em; background: var(--surface-alt); }
-  .stack-cell.value { color: var(--text); background: var(--surface); }
-  .stack-cell code { font-family: 'Courier New', monospace; font-size: 11px; background: var(--surface-alt); padding: 1px 5px; border-radius: 3px; color: var(--accent); }
-
-  .stack-note { margin-top: 12px; font-size: 13px; color: var(--muted); padding: 14px 16px; background: var(--accent-light); border-radius: var(--radius); }
-  .stack-note strong { color: var(--text); font-weight: 500; }
-
   /* Not list */
   .not-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
   .not-tag { font-size: 12px; color: var(--muted); background: var(--surface); border: 0.5px solid var(--border); padding: 5px 12px; border-radius: 20px; text-decoration: line-through; text-decoration-color: var(--accent); }
@@ -219,7 +222,7 @@
 
   @media (max-width: 600px) {
     .page { padding: 40px 24px; }
-    .two-col, .mono-grid, .stack-grid { grid-template-columns: 1fr; }
+    .two-col, .mono-grid { grid-template-columns: 1fr; }
     .hero-headline { font-size: 30px; }
     .flow { flex-direction: column; }
     .flow-step:not(:first-child) { border-left: 0.5px solid var(--border); border-top: none; }
@@ -227,6 +230,7 @@
     .flow-step:last-child  { border-radius: 0 0 var(--radius) var(--radius); }
     .flow-step:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -12px; transform: none; }
     .header { flex-direction: column; gap: 8px; }
+    .header-right { align-items: flex-start; }
     .screens-wrapper { gap: 12px; }
     .phone-wrap { max-width: 160px; }
   }
@@ -237,8 +241,17 @@
 
   <header class="header">
     <div class="wordmark">Keen<span>ship</span></div>
-    <div class="doc-label">Beta — April 2026</div>
+    <div class="header-right">
+      <div class="doc-label">Beta — April 2026</div>
+      <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLang('de')">Deutsch</button>
+        <button class="lang-btn" onclick="setLang('en')">English</button>
+      </div>
+    </div>
   </header>
+
+  <!-- DEUTSCH -->
+  <div data-lang="de" class="visible">
 
   <section class="hero">
     <div class="hero-eyebrow">Beta</div>
@@ -268,35 +281,11 @@
     <div class="two-col">
       <div class="col-card">
         <h2 class="col-head">Automatische Priorität</h2>
-        <p class="col-text">Du legst für jeden Kontakt fest, wie oft du dich melden willst. Keenship berechnet daraus automatisch, wo jemand gerade steht: <strong>Überfällig</strong>, <strong>Bald</strong> oder <strong>Irgendwann</strong>. Der Homescreen zeigt dir täglich, wer gerade vernachlässigt wird – ohne Algorithmus, ohne Feed, ohne Fremde.</p>
+        <p class="col-text">Du legst einzeln fest, wen du im Blick behalten willst – und setzt ein Intervall, wie oft du dich melden möchtest. Keenship berechnet daraus automatisch, wo jemand gerade steht: <strong>Überfällig</strong>, <strong>Bald</strong> oder <strong>Irgendwann</strong>. Der Homescreen zeigt dir täglich, wer gerade vernachlässigt wird – ohne Algorithmus, ohne Feed, ohne Fremde.</p>
       </div>
       <div class="col-card">
         <h2 class="col-head">Gedächtnis, das mitdenkt</h2>
         <p class="col-text">Du loggst in drei Taps, was ihr gemacht habt. Die App erinnert sich. Stille Achievements entstehen im Hintergrund – "3 Bars, 2 Walks, 1 Konzert" – nicht als Gamification-Druck, sondern als gemeinsame Geschichte, die sichtbar wird.</p>
-      </div>
-    </div>
-  </section>
-
-  <hr class="rule">
-
-  <section>
-    <div class="section-label">Core Flow — Aktivität loggen</div>
-    <div class="flow">
-      <div class="flow-step">
-        <div class="flow-tap">Start</div>
-        <div class="flow-label">Homescreen<br><span style="font-size:11px;color:var(--faint);">Kontakte nach Priorität</span></div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-tap">Tap 1</div>
-        <div class="flow-label">Person wählen<br><span style="font-size:11px;color:var(--faint);">z.B. Konrad</span></div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-tap">Tap 2</div>
-        <div class="flow-label">Aktivität<br><span style="font-size:11px;color:var(--faint);">Kaffee, Walk…</span></div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-tap">Tap 3</div>
-        <div class="flow-label">Fertig<br><span style="font-size:11px;color:var(--faint);">Optional: Notiz</span></div>
       </div>
     </div>
   </section>
@@ -333,6 +322,30 @@
       <div class="science-text">
         <strong>Feedback direkt an mich</strong>
         Schreib einfach an <a href="mailto:me@stefanhermann.io" style="color:var(--accent);text-decoration:none;">me@stefanhermann.io</a> – formlos, auf Deutsch, gerne auch als kurze Sprachnachricht per WhatsApp. Alles hilft.
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">Core Flow — Aktivität loggen</div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-tap">Start</div>
+        <div class="flow-label">Homescreen<br><span style="font-size:11px;color:var(--faint);">Kontakte nach Priorität</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-tap">Tap 1</div>
+        <div class="flow-label">Person wählen<br><span style="font-size:11px;color:var(--faint);">z.B. Konrad</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-tap">Tap 2</div>
+        <div class="flow-label">Aktivität<br><span style="font-size:11px;color:var(--faint);">Kaffee, Walk…</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-tap">Tap 3</div>
+        <div class="flow-label">Fertig<br><span style="font-size:11px;color:var(--faint);">Optional: Notiz</span></div>
       </div>
     </div>
   </section>
@@ -537,6 +550,322 @@
     </div>
   </footer>
 
+  </div><!-- /de -->
+
+  <!-- ENGLISH -->
+  <div data-lang="en">
+
+  <section class="hero">
+    <div class="hero-eyebrow">Beta</div>
+    <h1 class="hero-headline">The private tool that<br>doesn't forget your<br><em>friendships</em>.</h1>
+    <p class="hero-sub">Keenship helps you stay in touch with people you don't want to lose sight of. Close friends, former colleagues, old acquaintances – people you sometimes think about and tell yourself: <em style="font-style:italic;color:var(--text);">"We should catch up sometime."</em><br><br>No social media, no feed, no followers – just a private memory for the connections that matter to you.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">The Problem</div>
+    <div class="problem-quote">"We should hang out again." Then three months go by.</div>
+    <p class="problem-text">For people in their 30s and 50s, genuine contact becomes the exception. Not out of indifference – but because everyday life simply crowds it out. You don't lose the connection to people. You lose the moment when you should have acted.</p>
+    <div class="science">
+      <div class="science-number">+50%</div>
+      <div class="science-text">
+        <strong>Social connections measurably extend life.</strong>
+        Meta-analyses across 148 studies show: strong relationships increase survival probability by around 50%. That's not a wellness claim. That's medicine.
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">The Solution</div>
+    <div class="two-col">
+      <div class="col-card">
+        <h2 class="col-head">Automatic priority</h2>
+        <p class="col-text">You choose individually who you want to keep track of – and set an interval for how often you want to reach out. Keenship automatically calculates where someone stands: <strong>Overdue</strong>, <strong>Soon</strong>, or <strong>Someday</strong>. The home screen shows you daily who's being neglected – no algorithm, no feed, no strangers.</p>
+      </div>
+      <div class="col-card">
+        <h2 class="col-head">Memory that thinks ahead</h2>
+        <p class="col-text">You log in three taps what you did together. The app remembers. Silent achievements accumulate in the background – "3 Bars, 2 Walks, 1 Concert" – not as gamification pressure, but as a shared history that becomes visible.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">What I'd like to know from you</div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-num">01</div>
+        <div class="feature-body">
+          <strong>Does the core loop feel intuitive?</strong>
+          <p>Home screen → tap a contact → log an activity. Do you immediately know what to do? Do you stumble anywhere?</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">02</div>
+        <div class="feature-body">
+          <strong>Are the reminders helpful or annoying?</strong>
+          <p>Keenship reminds you when it's time to reach out to someone. Do the nudges feel right – or do they come too often, too rarely, in the wrong tone?</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">03</div>
+        <div class="feature-body">
+          <strong>Is anything missing that you expected?</strong>
+          <p>What did you look for and not find? What would have been your next natural step?</p>
+        </div>
+      </div>
+    </div>
+    <div class="science" style="margin-top:28px;">
+      <div style="font-size:22px;flex-shrink:0;padding-top:2px;">✉</div>
+      <div class="science-text">
+        <strong>Send feedback directly to me</strong>
+        Write to <a href="mailto:me@stefanhermann.io" style="color:var(--accent);text-decoration:none;">me@stefanhermann.io</a> – informal, in any language, a quick voice note via WhatsApp works too. Everything helps.
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">Core Flow — Logging an activity</div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-tap">Start</div>
+        <div class="flow-label">Home screen<br><span style="font-size:11px;color:var(--faint);">Contacts by priority</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-tap">Tap 1</div>
+        <div class="flow-label">Choose person<br><span style="font-size:11px;color:var(--faint);">e.g. Konrad</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-tap">Tap 2</div>
+        <div class="flow-label">Activity<br><span style="font-size:11px;color:var(--faint);">Coffee, Walk…</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-tap">Tap 3</div>
+        <div class="flow-label">Done<br><span style="font-size:11px;color:var(--faint);">Optional: note</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">App — Preview</div>
+    <div class="screens-wrapper">
+
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-inner">
+            <div class="ph-time">9:41</div>
+            <div class="ph-greeting">Good morning, Stefan</div>
+            <div class="ph-section-label">Overdue</div>
+            <div class="ph-contact urgent">
+              <div class="ph-avatar purple">KO</div>
+              <div class="ph-contact-info">
+                <div class="ph-contact-name">Konrad</div>
+                <div class="ph-contact-sub urgent">47 days ago</div>
+              </div>
+              <div class="ph-git"><svg viewBox="0 0 24 24" fill="none" stroke="#733ee4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
+            </div>
+            <div class="ph-contact urgent">
+              <div class="ph-avatar amber">MH</div>
+              <div class="ph-contact-info">
+                <div class="ph-contact-name">Mia</div>
+                <div class="ph-contact-sub urgent">31 days ago</div>
+              </div>
+              <div class="ph-git"><svg viewBox="0 0 24 24" fill="none" stroke="#733ee4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
+            </div>
+            <div class="ph-section-label">Soon</div>
+            <div class="ph-contact soon">
+              <div class="ph-avatar teal">AS</div>
+              <div class="ph-contact-info">
+                <div class="ph-contact-name">Anna</div>
+                <div class="ph-contact-sub soon">18 days ago</div>
+              </div>
+              <div class="ph-git"><svg viewBox="0 0 24 24" fill="none" stroke="#733ee4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
+            </div>
+            <div class="ph-contact soon">
+              <div class="ph-avatar purple">LB</div>
+              <div class="ph-contact-info">
+                <div class="ph-contact-name">Luis</div>
+                <div class="ph-contact-sub soon">12 days ago</div>
+              </div>
+              <div class="ph-git"><svg viewBox="0 0 24 24" fill="none" stroke="#733ee4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
+            </div>
+            <div style="flex:1;"></div>
+            <div class="ph-tabbar">
+              <div class="ph-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#733ee4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span style="color:#733ee4;">Home</span>
+              </div>
+              <div class="ph-tab ph-tab-hero"><div class="ph-tab-plus">+</div></div>
+              <div class="ph-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#b5b2ac" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                <span>Settings</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-caption">Home</div>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-inner">
+            <div class="ph-time">9:41</div>
+            <div class="ph-back">← Back</div>
+            <div class="ph-profile">
+              <div class="ph-avatar-lg">KO</div>
+              <div style="flex:1;">
+                <div class="ph-profile-name">Konrad</div>
+                <div class="ph-profile-sub">Last seen 47 days ago</div>
+              </div>
+              <div class="ph-git"><svg viewBox="0 0 24 24" fill="none" stroke="#733ee4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
+            </div>
+            <div class="ph-tags">
+              <span class="ph-tag">3 Bars</span>
+              <span class="ph-tag">2 Walks</span>
+              <span class="ph-tag">1 Concert</span>
+            </div>
+            <hr class="ph-divider">
+            <div class="ph-section-label">History</div>
+            <div class="ph-log-row"><span class="ph-log-act">Coffee</span><span class="ph-log-date">Mar 12</span></div>
+            <div class="ph-log-row"><span class="ph-log-act">Bar</span><span class="ph-log-date">Feb 14</span></div>
+            <div class="ph-log-row"><span class="ph-log-act">Walk</span><span class="ph-log-date">Jan 3</span></div>
+            <div style="flex:1;"></div>
+            <div class="ph-tabbar">
+              <div class="ph-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#b5b2ac" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Home</span>
+              </div>
+              <div class="ph-tab ph-tab-hero"><div class="ph-tab-plus">+</div></div>
+              <div class="ph-tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#b5b2ac" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                <span>Settings</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-caption">Contact</div>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-inner">
+            <div class="ph-time">9:41</div>
+            <div class="ph-back">← Konrad</div>
+            <div class="ph-screen-title">What did you do?</div>
+            <div class="ph-activity-item selected">Coffee</div>
+            <div class="ph-activity-item normal">Bar</div>
+            <div class="ph-activity-item normal">Concert</div>
+            <div class="ph-activity-item normal">Dinner</div>
+            <div class="ph-activity-item normal">Lunch</div>
+            <div class="ph-activity-item normal">Walk</div>
+            <div class="ph-textarea">Note (optional)…</div>
+            <div style="flex:1;"></div>
+            <div class="ph-btn">Done</div>
+          </div>
+        </div>
+        <div class="phone-caption">Activity</div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">MVP — Core features</div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-num">01</div>
+        <div class="feature-body">
+          <strong>Automatic priority</strong>
+          <p>You choose individually who you want to keep track of – from your contacts or added manually. Set an interval for how often you want to reach out. Keenship handles the rest: Overdue / Soon / Someday, calculated from your last activity.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">02</div>
+        <div class="feature-body">
+          <strong>Activity log</strong>
+          <p>Bar · Coffee · Concert · Dinner · Lunch · Cinema · Park · Sports · Walk. Optional free-text note. Three taps, done.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">03</div>
+        <div class="feature-body">
+          <strong>Shared history</strong>
+          <p>Activity types per person are collected and made visible – "3 Bars · 2 Walks · 1 Concert". No points system, no pressure.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">04</div>
+        <div class="feature-body">
+          <strong>Private by design</strong>
+          <p>All data stays on your device. Manual backup via export. No cloud, no account, no subscription.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">What Keenship is not</div>
+    <div class="not-list">
+      <span class="not-tag">Social feed</span>
+      <span class="not-tag">public profiles</span>
+      <span class="not-tag">streak system</span>
+      <span class="not-tag">GPS tracking</span>
+      <span class="not-tag">followers</span>
+      <span class="not-tag">likes &amp; reactions</span>
+      <span class="not-tag">algorithm</span>
+      <span class="not-tag">ads</span>
+      <span class="not-tag">backend / server</span>
+      <span class="not-tag">shared activities</span>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">Positioning</div>
+    <div class="positioning">
+      <p>For people in their 30s and 50s who know that real connections are the most important thing in life – <em>but still lose touch in everyday life.</em> Keenship is the private memory that works for your future self.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Stefan Hermann · Keenship</span>
+    <div style="display:flex;gap:20px;align-items:center;">
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:me@stefanhermann.io">me@stefanhermann.io</a>
+      <span>April 2026</span>
+    </div>
+  </footer>
+
+  </div><!-- /en -->
+
 </div>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('visible', el.dataset.lang === lang);
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim().toLowerCase().startsWith(lang === 'de' ? 'd' : 'e'));
+    });
+    document.documentElement.lang = lang;
+  }
+</script>
 </body>
 </html>
