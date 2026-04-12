@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keenship — Product Concept</title>
+<title>Keenship — Beta</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -237,13 +237,13 @@
 
   <header class="header">
     <div class="wordmark">Keen<span>ship</span></div>
-    <div class="doc-label">Product Concept — v2</div>
+    <div class="doc-label">Beta — April 2026</div>
   </header>
 
   <section class="hero">
-    <div class="hero-eyebrow">Concept</div>
+    <div class="hero-eyebrow">Beta</div>
     <h1 class="hero-headline">Das private Tool,<br>das deine <em>Freundschaften</em><br>nicht vergisst.</h1>
-    <p class="hero-sub">Ein persönliches Gedächtnis für die Menschen, die dir wirklich wichtig sind – und ein leiser Anstoß, bevor zu viel Zeit vergeht. Privat, ruhig, nur für dich.</p>
+    <p class="hero-sub">Keenship hilft dir, den Kontakt zu Menschen zu halten, die du nicht aus den Augen verlieren willst. Enge Freunde, ehemalige Kollegen, alte Bekannte – Menschen, an die du manchmal denkst und dir sagst: <em style="font-style:italic;color:var(--text);">"Wir sollten uns mal wieder austauschen."</em><br><br>Keine Social Media, kein Feed, keine Follower – nur ein privates Gedächtnis für die Verbindungen, die dir wichtig sind.</p>
   </section>
 
   <hr class="rule">
@@ -268,7 +268,7 @@
     <div class="two-col">
       <div class="col-card">
         <h2 class="col-head">Triage für Freundschaften</h2>
-        <p class="col-text">Beim ersten Start importierst du deine Kontakte und sortierst sie in drei Stapel: <strong>Überfällig</strong>, <strong>Bald</strong>, <strong>Irgendwann</strong>. Der Homescreen zeigt dir täglich, wer gerade vernachlässigt wird – ohne Algorithmus, ohne Feed, ohne Fremde.</p>
+        <p class="col-text">Du legst einzeln fest, wen du im Blick behalten willst – und sortierst jeden in einen von drei Stapeln: <strong>Überfällig</strong>, <strong>Bald</strong>, <strong>Irgendwann</strong>. Der Homescreen zeigt dir täglich, wer gerade vernachlässigt wird – ohne Algorithmus, ohne Feed, ohne Fremde.</p>
       </div>
       <div class="col-card">
         <h2 class="col-head">Gedächtnis, das mitdenkt</h2>
@@ -297,6 +297,42 @@
       <div class="flow-step">
         <div class="flow-tap">Tap 3</div>
         <div class="flow-label">Fertig<br><span style="font-size:11px;color:var(--faint);">Optional: Notiz</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-label">Was ich von dir wissen möchte</div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-num">01</div>
+        <div class="feature-body">
+          <strong>Fühlt sich der Core Loop intuitiv an?</strong>
+          <p>Homescreen → Kontakt antippen → Aktivität loggen. Weißt du sofort, was zu tun ist? Stolperst du irgendwo?</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">02</div>
+        <div class="feature-body">
+          <strong>Sind die Erinnerungen hilfreich oder nervig?</strong>
+          <p>Keenship erinnert dich, wenn bei jemandem wieder Zeit wäre. Fühlen sich die Hinweise richtig an – oder kommen sie zu oft, zu selten, im falschen Ton?</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-num">03</div>
+        <div class="feature-body">
+          <strong>Fehlt dir etwas, das du erwartet hättest?</strong>
+          <p>Was hast du gesucht und nicht gefunden? Was wäre für dich der nächste natürliche Schritt gewesen?</p>
+        </div>
+      </div>
+    </div>
+    <div class="science" style="margin-top:28px;">
+      <div style="font-size:22px;flex-shrink:0;padding-top:2px;">✉</div>
+      <div class="science-text">
+        <strong>Feedback direkt an mich</strong>
+        Schreib einfach an <a href="mailto:me@stefanhermann.io" style="color:var(--accent);text-decoration:none;">me@stefanhermann.io</a> – formlos, auf Deutsch, gerne auch als kurze Sprachnachricht per WhatsApp. Alles hilft.
       </div>
     </div>
   </section>
@@ -438,7 +474,7 @@
         <div class="feature-num">01</div>
         <div class="feature-body">
           <strong>Kontakt-Triage</strong>
-          <p>Import aus dem Adressbuch. Einmalige Sortierung in Überfällig / Bald / Irgendwann. Jederzeit anpassbar. Unbegrenzt viele Kontakte.</p>
+          <p>Du wählst einzeln, wen du im Blick behalten willst – aus dem Adressbuch oder manuell angelegt. Einmalige Sortierung in Überfällig / Bald / Irgendwann. Jederzeit anpassbar.</p>
         </div>
       </div>
       <div class="feature">
@@ -463,23 +499,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <hr class="rule">
-
-  <section>
-    <div class="section-label">Tech Stack</div>
-    <div class="stack-grid">
-      <div class="stack-cell label">Framework</div>
-      <div class="stack-cell value">React Native + <code>Expo</code></div>
-      <div class="stack-cell label">Datenbank</div>
-      <div class="stack-cell value"><code>expo-sqlite</code> + <code>drizzle-orm</code> — lokal auf dem Gerät</div>
-      <div class="stack-cell label">Backup</div>
-      <div class="stack-cell value">Lokaler JSON-Export &amp; -Import via <code>expo-file-system</code> · manuelles Teilen</div>
-      <div class="stack-cell label">Backend</div>
-      <div class="stack-cell value" style="color:var(--faint);">Keiner. Keine Server, kein Auth, keine API.</div>
-    </div>
-    <div class="stack-note"><strong>Privacy by architecture:</strong> Alle Daten liegen auf dem Gerät des Nutzers. Kein Server empfängt persönliche Informationen. Das ist kein Feature – es ist ein Versprechen, das die Architektur automatisch hält.</div>
   </section>
 
   <hr class="rule">
