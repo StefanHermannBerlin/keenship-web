@@ -865,7 +865,13 @@
       btn.classList.toggle('active', btn.textContent.trim().toLowerCase().startsWith(lang === 'de' ? 'd' : 'e'));
     });
     document.documentElement.lang = lang;
+    localStorage.setItem('keenship-lang', lang);
   }
+
+  (function () {
+    const saved = localStorage.getItem('keenship-lang');
+    if (saved && saved !== 'de') setLang(saved);
+  })();
 </script>
 </body>
 </html>

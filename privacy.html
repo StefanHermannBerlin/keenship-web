@@ -46,42 +46,43 @@
       margin-bottom: 2.5rem;
     }
 
-    .app-name {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
+    .page-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 0.5px solid var(--border);
+      padding-bottom: 20px;
+      margin-bottom: 2.5rem;
     }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
+    .wordmark {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
       letter-spacing: -0.5px;
-    }
-
-    .meta {
-      font-size: 0.875rem;
-      color: var(--muted);
-    }
-
-    .back-link {
-      display: inline-block;
-      font-size: 0.8rem;
-      color: var(--accent);
+      color: var(--text);
       text-decoration: none;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.02em;
     }
 
-    .back-link:hover { text-decoration: underline; }
+    .wordmark span { color: var(--accent); }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .doc-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #b5b2ac;
+      font-weight: 500;
+    }
 
     .lang-switch {
       display: flex;
       gap: 0.5rem;
-      margin-top: 1.25rem;
     }
 
     .lang-btn {
@@ -175,14 +176,14 @@
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <a class="back-link" href="index.html">← Keenship</a>
-      <div class="app-name">Keenship</div>
-      <h1 id="page-title">Datenschutzerklärung</h1>
-      <p class="meta" id="page-meta">Stand: April 2026 &nbsp;·&nbsp; <a href="mailto:me@stefanhermann.io">me@stefanhermann.io</a></p>
-      <div class="lang-switch">
-        <button class="lang-btn active" onclick="setLang('de')">Deutsch</button>
-        <button class="lang-btn" onclick="setLang('en')">English</button>
+    <header class="page-header">
+      <a class="wordmark" href="index.html">Keen<span>ship</span></a>
+      <div class="header-right">
+        <div class="doc-label" id="page-title">Datenschutzerklärung</div>
+        <div class="lang-switch">
+          <button class="lang-btn active" onclick="setLang('de')">Deutsch</button>
+          <button class="lang-btn" onclick="setLang('en')">English</button>
+        </div>
       </div>
     </header>
 
@@ -393,11 +394,14 @@
       });
       document.getElementById('page-title').textContent =
         lang === 'de' ? 'Datenschutzerklärung' : 'Privacy Policy';
-      document.getElementById('page-meta').innerHTML =
-        lang === 'de'
-          ? 'Stand: April 2026 &nbsp;·&nbsp; <a href="mailto:me@stefanhermann.io">me@stefanhermann.io</a>'
-          : 'Last updated: April 2026 &nbsp;·&nbsp; <a href="mailto:me@stefanhermann.io">me@stefanhermann.io</a>';
+      document.documentElement.lang = lang;
+      localStorage.setItem('keenship-lang', lang);
     }
+
+    (function () {
+      const saved = localStorage.getItem('keenship-lang');
+      if (saved && saved !== 'de') setLang(saved);
+    })();
   </script>
 </body>
 </html>
